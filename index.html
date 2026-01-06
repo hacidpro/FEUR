@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mini site</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="card">
+    <h1>Squelette basique</h1>
+
+    <div class="row">
+      <input
+        id="textInput"
+        type="text"
+        placeholder="Tape quelque chose puis appuie sur Entrée…"
+      />
+    </div>
+
+    <div class="buttons">
+      <button id="submitBtn" class="primary" disabled>Valider</button>
+      <button id="rickrollBtn" title="Ne clique pas 😄">Rickroll</button>
+    </div>
+
+    <div class="hint">
+      Entrée dans le champ → déclenche “Valider”.
+    </div>
+
+    <div id="output" class="output"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
