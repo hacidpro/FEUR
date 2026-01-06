@@ -1,30 +1,6 @@
 const input = document.getElementById("textInput");
-const submitBtn = document.getElementById("submitBtn");
 const rickrollBtn = document.getElementById("rickrollBtn");
 const output = document.getElementById("output");
-
-function syncButtonState() {
-  submitBtn.disabled = input.value.trim() === "";
-}
-
-function onSubmit() {
-  const value = input.value.trim();
-  if (!value) return;
-  output.textContent = `Tu as validé : "${value}"`;
-}
-
-input.addEventListener("input", syncButtonState);
-
-input.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    if (!submitBtn.disabled) {
-      onSubmit();
-    }
-  }
-});
-
-submitBtn.addEventListener("click", onSubmit);
 
 rickrollBtn.addEventListener("click", () => {
   window.open(
@@ -34,4 +10,43 @@ rickrollBtn.addEventListener("click", () => {
   );
 });
 
-syncButtonState();
+
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("textInput");
+  const rickrollBtn = document.getElementById("rickrollBtn");
+
+  // Rickroll 😄
+  rickrollBtn.addEventListener("click", () => {
+    window.open(
+      "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  });
+
+  function textToBin(text) {
+    return text
+      .split("")
+      .map((char) => {
+        return char.charCodeAt(0).toString(2).padStart(8, "0");
+      })
+      .join(" ");
+  }
+
+  const inputElement2 = document.getElementById("convBin");
+  inputElement2?.addEventListener("click", () => {
+    if (textInput) {
+      if (!textInput.dataset.original) {
+        textInput.dataset.original = textInput.value;
+        textInput.value = textToBin(textInput.value);
+        inputElement2.textContent = "convertir en  texte";
+        textInput.readOnly = true;
+      }
+      else {
+        textInput.value = textInput.dataset.original;
+        delete textInput.dataset.original;
+        inputElement2.textContent = "convertir en binaire";
+      }
+    }
+  });
+});
