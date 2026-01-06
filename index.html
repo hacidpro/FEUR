@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mini site</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        margin: 0;
+        padding: 32px;
+        background: #f6f7fb;
+      }
+      .card {
+        max-width: 520px;
+        margin: 0 auto;
+        background: white;
+        border: 1px solid #e6e8ef;
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+      }
+      h1 {
+        margin: 0 0 14px;
+        font-size: 20px;
+      }
+      .row {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      input[type="text"] {
+        flex: 1;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid #ccd3e0;
+        outline: none;
+        font-size: 14px;
+      }
+      input[type="text"]:focus {
+        border-color: #7aa7ff;
+      }
+      .buttons {
+        margin-top: 14px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      button {
+        padding: 10px 14px;
+        border-radius: 10px;
+        border: 1px solid #ccd3e0;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      button.primary {
+        background: #2f6fff;
+        border-color: #2f6fff;
+        color: white;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .hint {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #586174;
+      }
+      .output {
+        margin-top: 12px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        background: #f2f4f8;
+        border: 1px solid #e6e8ef;
+        min-height: 20px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Squelette basique</h1>
+
+      <div class="row">
+        <input id="textInput" type="text" placeholder="Tape quelque chose" />
+      </div>
+
+      <div class="buttons">
+        <button id="convBin" class="primary">convertir en binaire</button>
+      </div>
+
+      <div class="buttons">
+        <button id="rickrollBtn" title="Ne clique pas 😄">Rickroll</button>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const input = document.getElementById("textInput");
+        const rickrollBtn = document.getElementById("rickrollBtn");
+
+        // Rickroll 😄
+        rickrollBtn.addEventListener("click", () => {
+          window.open(
+            "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            "_blank",
+            "noopener,noreferrer"
+          );
+        });
+
+        function textToBin(text) {
+          return text
+            .split("")
+            .map((char) => {
+              return char.charCodeAt(0).toString(2).padStart(8, "0");
+            })
+            .join(" ");
+        }
+
+        const inputElement2 = document.getElementById("convBin");
+        inputElement2?.addEventListener("click", () => {
+          if (textInput) {
+            if (!textInput.dataset.original) {
+              textInput.dataset.original = textInput.value; 
+              textInput.value = textToBin(textInput.value); 
+              inputElement2.textContent = "convertir en  texte";
+              textInput.readOnly = true;
+            }
+            else {
+              textInput.value = textInput.dataset.original;
+              delete textInput.dataset.original;
+              inputElement2.textContent = "convertir en binaire";
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
